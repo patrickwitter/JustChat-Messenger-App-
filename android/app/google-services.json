@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "636230008740",
+    "project_id": "fir-setup-proj",
+    "storage_bucket": "fir-setup-proj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636230008740:android:954399036428587df5cb31",
+        "android_client_info": {
+          "package_name": "com.patrickwitterfirebase.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636230008740-79qj8li1v475a7e1qit0ho0ljp4foir5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3HQk8eXjjJrI25C-xMxupFC4_V3OzGLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636230008740-79qj8li1v475a7e1qit0ho0ljp4foir5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
