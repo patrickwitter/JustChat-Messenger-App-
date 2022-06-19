@@ -52,7 +52,7 @@ class FirebaseService {
         ).toJson();
 
         addUserInfoToDB(userDetails.uid, userInfoMap).then((value) {
-          _navigationService.navigateTo(Routes.home);
+          _navigationService.replaceAndNavigateTo(Routes.home);
         });
       }
     }
@@ -104,17 +104,14 @@ class FirebaseService {
 // If it does , it returns true.
 // If it doesn't exist it creates a chatroom(document) with that id and
 //add the infoMap properties.
-  createChatRoom(
+  Future<void> createChatRoom(
       String chatRoomId, Map<String, dynamic> chatRoomInfoMap) async {
     final snapShot = await FirebaseFirestore.instance
         .collection("chatrooms")
         .doc(chatRoomId)
         .get();
 
-    if (snapShot.exists) {
-      // chatroom already exists
-      return true;
-    } else {
+    if (!snapShot.exists) {
       // chatroom does not exists
       return FirebaseFirestore.instance
           .collection("chatrooms")
