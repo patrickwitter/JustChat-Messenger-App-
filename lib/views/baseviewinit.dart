@@ -21,8 +21,8 @@ class _BaseViewInitState<T extends GetxController>
   void initState() {
     if (widget.onModelReady != null) {
       widget.onModelReady!(model);
+      super.initState();
     }
-    super.initState();
   }
 
   @override
