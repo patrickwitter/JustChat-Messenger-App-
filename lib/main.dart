@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:messengerapp/constants/navigation_constants.dart' as navconst;
@@ -7,8 +8,9 @@ import 'package:messengerapp/setup.dart';
 import 'package:messengerapp/theme.dart';
 import 'package:messengerapp/views/home.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   setup();
   runApp(const MessengerApp());
 }
@@ -25,7 +27,7 @@ class MessengerApp extends StatelessWidget {
         home: const Home(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: router.ongenerateRoute,
-        initialRoute: navconst.Routes.home,
+        initialRoute: navconst.Routes.signin,
         navigatorKey: Get.find<NavigationService>().navkey);
   }
 }
