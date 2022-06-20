@@ -10,6 +10,7 @@ class ChatMessageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(" Sent by me $sendbyMe");
     return Row(
       mainAxisAlignment:
           sendbyMe ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -26,7 +27,7 @@ class ChatMessageTile extends StatelessWidget {
                   bottomLeft:
                       sendbyMe ? Radius.circular(24) : Radius.circular(0),
                 ),
-                color: sendbyMe ? Colors.blue : Color(0xfff1f0f0),
+                color: sendbyMe ? Colors.blue : Colors.black,
               ),
               padding: EdgeInsets.all(16),
               child: Text(
