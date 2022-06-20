@@ -20,18 +20,31 @@ class ChatMessages extends StatelessWidget {
           return StreamBuilder<QuerySnapshot>(
             stream: model.messengeStream,
             builder: (context, snapshot) {
-              return snapshot.hasData
-                  ? ListView.builder(
-                      padding: EdgeInsets.only(bottom: 70, top: 16),
-                      itemCount: snapshot.data!.docs.length,
-                      reverse: true,
-                      itemBuilder: (context, index) {
-                        DocumentSnapshot ds = snapshot.data!.docs[index];
-                        return ChatMessageTile(
-                            message: ds["message"],
-                            sendbyMe: myUserName == ds["sendBy"]);
-                      })
-                  : Center(child: CircularProgressIndicator());
+              if (snapshot.hasData) {
+                return ListView.builder(
+                    padding: EdgeInsets.only(bottom: 70, top: 16),
+                    itemCount: snapshot.data!.docs.length,
+                    reverse: true,
+                    itemBuilder: (context, index) {
+                      DocumentSnapshot ds = snapshot.data!.docs[index];
+                      print(
+                          "message sent by ${ds["sendBy"]} the user $myUserName");
+                      return ChatMessageTile(
+                        message: ds["message"],
+                        sendbyMe: myUserName == ds["sendBy"],
+                      );
+                    });
+              } else if (snapshot.connectionState != ConnectionState.waiting) {
+                return ListView(
+                  children: [
+                    Center(
+                      child: Text("Send your first message"),
+                    )
+                  ],
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
             },
           );
         });

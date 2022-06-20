@@ -5,16 +5,21 @@ import 'package:messengerapp/views/baseviewinit.dart';
 import 'package:messengerapp/views/searchlist_usertile.dart';
 
 class SearchUserList extends StatelessWidget {
-  const SearchUserList({Key? key}) : super(key: key);
+  const SearchUserList({required this.user, Key? key}) : super(key: key);
 
+  final String user;
   @override
   Widget build(BuildContext context) {
-    return BaseViewInit<SearchUserViewModel>(builder: (context, model) {
-      return StreamBuilder<QuerySnapshot>(
-        stream: model.usersStream,
-        builder: (context, snapshot) {
-          return snapshot.hasData
-              ? ListView.builder(
+    return BaseViewInit<SearchUserViewModel>(
+        onModelReady: (model) => model.initialize(user),
+        builder: (context, model) {
+          print("Search User Loaded");
+          return StreamBuilder<QuerySnapshot>(
+            stream: model.usersStream,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                print("has data");
+                return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -26,12 +31,18 @@ class SearchUserList extends StatelessWidget {
                       username: ds["username"],
                     );
                   },
-                )
-              : Center(
+                );
+              } else if (!snapshot.hasData) {
+                return Center(
+                  child: Text("No user found"),
+                );
+              } else {
+                return Center(
                   child: CircularProgressIndicator(),
                 );
-        },
-      );
-    });
+              }
+            },
+          );
+        });
   }
 }

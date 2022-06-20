@@ -5,20 +5,22 @@ import 'package:messengerapp/views/chatmessages.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({
-    required this.chatWithUsername,
+    required this.otherUsername,
     required this.name,
+    required this.chatRoomId,
     Key? key,
   }) : super(key: key);
 
-  final String chatWithUsername, name;
+  final String otherUsername, name, chatRoomId;
   @override
   Widget build(BuildContext context) {
     return BaseViewInit<ChatScreenViewModel>(
-      onModelReady: (model) => model.initialize(chatWithUsername, name),
+      onModelReady: (model) =>
+          model.initialize(otherUsername, name, chatRoomId),
       builder: ((context, model) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(name),
+            title: Text(otherUsername),
           ),
           body: Container(
             child: Stack(

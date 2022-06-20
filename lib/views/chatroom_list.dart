@@ -28,20 +28,23 @@ class ChatRoomList extends StatelessWidget {
                     itemBuilder: (context, index) {
                       DocumentSnapshot ds = snapshot.data!.docs[
                           index]; // The index of the ith chatroom the user is apart of
+                      print("ChatRoom id ${ds.id} myUserName $myUserName");
                       return ChatRoomListTile(
                         lastMessage: ds["lastMessage"],
                         chatRoomId: ds.id,
                         myUsername: myUserName,
                       );
-                      // return Center(
-                      //   child: Text("has data"),
-                      // );
                     });
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                    child: Text(
+                        "No chats Created Search for a user to chat with"));
               } else if (!snapshot.hasData && !snapshot.hasError) {
-                return Center(child: CircularProgressIndicator());
+                return Center(
+                    child: Text(
+                        "No chats Created Search for a user to chat with"));
               } else
-                print("Error ${snapshot.error}");
-              return Container();
+                return Center(child: Text("Error ${snapshot.error}"));
             },
           );
         }));

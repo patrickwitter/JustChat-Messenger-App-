@@ -16,14 +16,13 @@ class ChatRoomListTile extends StatelessWidget {
     return BaseViewInit<ChatListTileViewModel>(
       onModelReady: (model) => model.initialize(chatRoomId, myUsername),
       builder: ((context, model) {
-        print("Building chat file.....");
         return GestureDetector(
           onTap: () {
             // Navigator.push(
             //     context,
             //     MaterialPageRoute(
             //         builder: (context) => ChatScreen( name:model.name, chatWithUsername: model.username)));
-            model.loadChatScreen();
+            model.loadChatScreen(chatRoomId);
           },
           child: Container(
             margin: EdgeInsets.symmetric(vertical: 8),
@@ -44,7 +43,7 @@ class ChatRoomListTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      model.name,
+                      model.otherusername,
                       style: TextStyle(fontSize: 16),
                     ),
                     SizedBox(height: 3),

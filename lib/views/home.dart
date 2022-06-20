@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
         onModelReady: (model) => model.initialze(),
         builder: (context, model) => Scaffold(
               appBar: AppBar(
-                title: Text("Messenger Clone"),
+                title: Text("Messenger Clone ${model.myUserName}"),
                 actions: [
                   InkWell(
                     onTap: () {
@@ -32,18 +32,21 @@ class Home extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        model.isSearching
-                            ? GestureDetector(
-                                onTap: () {
-                                  model.cancelSearch();
-                                },
-                                child: Padding(
-                                    padding: EdgeInsets.only(right: 12),
-                                    child: Icon(Icons.arrow_back)),
-                              ) // The back back arrow created when user searches something to delete it
-                            : Container(),
-                        //end)
-
+                        Obx(
+                          () => Visibility(
+                            visible: model.isSearching,
+                            child: GestureDetector(
+                              onTap: () {
+                                model.cancelSearch();
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 12),
+                                child: Icon(Icons.arrow_back),
+                              ),
+                            ), // The back back arrow created when user searches something to delete it
+                            replacement: Container(),
+                          ),
+                        ),
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.symmetric(vertical: 16),
@@ -64,26 +67,32 @@ class Home extends StatelessWidget {
                                       border: InputBorder.none,
                                       hintText: "username"),
                                 )),
-                                GestureDetector(
-                                    onTap: () {
+                                IconButton(
+                                    onPressed: () {
                                       if (model.searchUsernameEditingController
                                               .text !=
                                           "") {
                                         model.onSearchClick();
                                       }
                                     },
-                                    child: Icon(Icons.search))
+                                    icon: Icon(Icons.search)),
                               ],
                             ),
                           ),
                         ),
                       ],
                     ),
-                    model.isSearching
-                        ? SearchUserList()
-                        : ChatRoomList(
+
+                    Obx(() => Visibility(
+                          visible: model.isSearching,
+                          child: SearchUserList(
+                            user: model.searchUsernameEditingController.text,
+                          ),
+                          replacement: ChatRoomList(
                             myUserName: model.myUserName,
                           ),
+                        )),
+
                     // If the user is searching the searchUsersList will be visible.
                     // Else the chat rooms list will be visible
                   ],
