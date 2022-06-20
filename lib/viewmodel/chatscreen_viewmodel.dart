@@ -12,11 +12,11 @@ class ChatScreenViewModel extends GetxController {
   final SharedPreferncesService _preferncesService =
       Get.find<SharedPreferncesService>();
 
-  late final String _name;
-  late final String _profileUrl;
-  late final String _userName;
-  late final String _email;
-  late final String _chatRoomId;
+  String? _name;
+  String? _profileUrl;
+  String? _userName;
+  String? _email;
+  String? _chatRoomId;
   String messageId = "";
 
   get chatRoomId => _chatRoomId;
@@ -48,7 +48,7 @@ class ChatScreenViewModel extends GetxController {
       }
 // Adds message to the chats message doc
       _firebaseService
-          .addMessage(_chatRoomId, messageId, messageInfoMap)
+          .addMessage(_chatRoomId!, messageId, messageInfoMap)
           .then((value) {
         Map<String, dynamic> lastMessageInfoMap = {
           "lastMessage": message,
@@ -57,7 +57,8 @@ class ChatScreenViewModel extends GetxController {
         };
 
 // Updates the chat collection with last infoMap
-        _firebaseService.updateLastMessageSend(_chatRoomId, lastMessageInfoMap);
+        _firebaseService.updateLastMessageSend(
+            _chatRoomId!, lastMessageInfoMap);
 
         if (sendClicked) {
           // remove the text in the message input field
@@ -69,9 +70,9 @@ class ChatScreenViewModel extends GetxController {
     }
   }
 
-  void initialize(String chatWithUsername, myUserName) async {
-    _chatRoomId = _getChatRoomIdByUsernames(chatWithUsername, myUserName);
-    print("chatroom id ${_chatRoomId}");
+  void initialize(String chatWithUsername, myUserName, chatroomId) async {
+    _chatRoomId = chatroomId;
+    print("chatroom id ${_chatRoomId!}");
     _name = await _preferncesService.getDisplayName();
     _profileUrl = await _preferncesService.getUserProfileUrl();
     _userName = await _preferncesService.getUserName();

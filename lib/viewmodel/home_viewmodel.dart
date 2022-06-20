@@ -19,13 +19,13 @@ class HomeViewModel extends GetxController {
 
   final RxString _name = "".obs;
   final RxString _profileUrl = "".obs;
-  final RxString _userName = "".obs;
+  String _userName = "";
   final RxString _email = "".obs;
   final RxString _controllertext = "".obs;
 
   get myName => _name.value;
   get myProfilePic => _profileUrl.value;
-  get myUserName => _userName.value;
+  get myUserName => _userName;
   get myEmail => _email.value;
 
   get isSearching => _isSearching.value;
@@ -33,7 +33,8 @@ class HomeViewModel extends GetxController {
   Future<void> _getMyInfoFromSharedPreference() async {
     _name.value = await _preferncesService.getDisplayName();
     _profileUrl.value = await _preferncesService.getUserProfileUrl();
-    _userName.value = await _preferncesService.getUserName();
+    _userName = await _preferncesService.getUserName();
+    print("userName ${_userName}");
     _email.value = await _preferncesService.getUserEmail();
   }
 
@@ -50,6 +51,8 @@ class HomeViewModel extends GetxController {
   }
 
   void onSearchClick() {
+    print("Clicked Search");
+    _firebaseService.getUserByUserName(searchUsernameEditingController.text);
     _isSearching.value = true;
   }
 
@@ -61,6 +64,7 @@ class HomeViewModel extends GetxController {
   @override
   void dispose() {
     searchUsernameEditingController.dispose();
+    _isSearching.close();
     super.dispose();
   }
 }

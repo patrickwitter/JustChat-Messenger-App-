@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:messengerapp/constants/navigation_constants.dart';
 import 'package:messengerapp/services/firebase_service.dart';
 import 'package:messengerapp/services/navigation_service.dart';
 import 'package:messengerapp/services/shareprefernces_service.dart';
@@ -24,5 +25,11 @@ class SearchListUserTileViewModel extends GetxController {
       "users": [myUserName, otheruserUsername]
     };
     await _firebaseService.createChatRoom(chatRoomId, chatRoomInfoMap);
+    print("otheruserUsername $otheruserUsername myUserName $myUserName");
+    _navserv.navigateTo(Routes.chatscreen, arguements: {
+      "otherUserName": otheruserUsername,
+      "chatUser": myUserName,
+      "chatid": chatRoomId,
+    });
   }
 }

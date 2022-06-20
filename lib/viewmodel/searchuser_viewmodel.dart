@@ -9,5 +9,7 @@ class SearchUserViewModel extends GetxController {
 
   void initialize(String text) async {
     usersStream = await _firebaseService.getUserByUserName(text);
+    bool s = await usersStream!.isEmpty;
+    print(s);
   }
 }

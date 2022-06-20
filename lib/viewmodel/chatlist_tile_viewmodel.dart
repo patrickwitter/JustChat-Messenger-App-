@@ -13,7 +13,7 @@ class ChatListTileViewModel extends GetxController {
 
   get profilePicUrl => _profilePicUrl.value;
   get name => _name.value;
-  get username => _username.value;
+  get otherusername => _username.value;
 
   void initialize(String chatRoomId, myUsername) async {
     await getThisUserInfo(chatRoomId, myUsername);
@@ -28,13 +28,18 @@ class ChatListTileViewModel extends GetxController {
         await _firebaseService.getUserInfo(_username.value);
     print(
         "something bla bla ${querySnapshot.docs[0].id} ${querySnapshot.docs[0]["name"]}  ${querySnapshot.docs[0]["imgUrl"]}");
-    _name.value = "${querySnapshot.docs[0]["name"]} ";
+    // _name.value = "${querySnapshot.docs[0]["username"]} ";
+    _name.value = myUsername;
     _profilePicUrl.value = "${querySnapshot.docs[0]["imgUrl"]}";
     print("_profilePicUrl.value   ${_profilePicUrl.value}");
   }
 
-  void loadChatScreen() {
-    _navServ.navigateTo(Routes.chatscreen,
-        arguements: {"name": name, "chatUser": username});
+  void loadChatScreen(String chatRoomid) {
+    print("MyUserName $name , OtherUserName $otherusername");
+    _navServ.navigateTo(Routes.chatscreen, arguements: {
+      "chatUser": name,
+      "otherUserName": otherusername,
+      "chatid": chatRoomid
+    });
   }
 }
