@@ -12,7 +12,7 @@ class FirebaseService {
   final NavigationService _navigationService = Get.find<NavigationService>();
   final SharedPreferncesService _preferncesService =
       Get.find<SharedPreferncesService>();
-
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   // 1.1  Returns the current user if user is signed in. If not null
   getCurrentUser() async {
     return _auth.currentUser;
@@ -20,10 +20,9 @@ class FirebaseService {
 
 // 1.2
   signInWithGoogle() async {
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
-
     final GoogleSignInAccount? googleSignInAccount =
         await _googleSignIn.signIn();
+
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount.authentication;
@@ -37,6 +36,7 @@ class FirebaseService {
       User? userDetails = result.user;
 
       if (userDetails != null) {
+        print("Email logged in ${userDetails.email}");
         _preferncesService.saveUserEmail(userDetails.email!);
         _preferncesService.saveUserId(userDetails.uid);
         _preferncesService
@@ -56,10 +56,12 @@ class FirebaseService {
         });
       }
     }
+    return;
   }
 
   Future signOut() async {
     await _preferncesService.deleteUserInfo();
+    await _googleSignIn.signOut();
     await _auth.signOut();
   }
 
