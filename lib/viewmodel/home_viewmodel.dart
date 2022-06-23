@@ -44,10 +44,9 @@ class HomeViewModel extends GetxController {
     await _getMyInfoFromSharedPreference();
   }
 
-  void signOut() {
-    _firebaseService
-        .signOut()
-        .then((value) => _navserv.replaceAndNavigateTo(Routes.signin));
+  void signOut() async {
+    await _firebaseService.signOut();
+    _navserv.pushReplacememtNamed(Routes.signin);
   }
 
   void onSearchClick() {

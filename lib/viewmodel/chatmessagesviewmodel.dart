@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:messengerapp/services/firebase_service.dart';
 
 class ChatMessagesViewModel extends GetxController {
-  Stream<QuerySnapshot>? messengeStream;
+  late Stream<QuerySnapshot<Object?>> messengeStream;
   final FirebaseService _firebaseService = Get.find<FirebaseService>();
 
-  void initalize(chatRoomId) async {
-    messengeStream = await _firebaseService.getChatRoomMessages(chatRoomId);
+  void initalize(chatRoomId) {
+    messengeStream = _firebaseService.getChatRoomMessages(chatRoomId);
   }
 }
