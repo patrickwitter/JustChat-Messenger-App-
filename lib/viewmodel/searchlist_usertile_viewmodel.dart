@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_escapes
+
 import 'package:get/get.dart';
 import 'package:messengerapp/constants/navigation_constants.dart';
 import 'package:messengerapp/services/firebase_service.dart';
@@ -19,7 +21,7 @@ class SearchListUserTileViewModel extends GetxController {
   }
 
   void createChatRoom(String otheruserUsername) async {
-    String myUserName = await _preferncesService.getUserName();
+    String myUserName = _preferncesService.getUserName();
     var chatRoomId = _getChatRoomIdByUsernames(myUserName, otheruserUsername);
     Map<String, dynamic> chatRoomInfoMap = {
       "users": [myUserName, otheruserUsername]

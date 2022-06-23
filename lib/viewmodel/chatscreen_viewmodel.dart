@@ -21,14 +21,6 @@ class ChatScreenViewModel extends GetxController {
 
   get chatRoomId => _chatRoomId;
 
-  String _getChatRoomIdByUsernames(String a, String b) {
-    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
-      return "$b\_$a";
-    } else {
-      return "$a\_$b";
-    }
-  }
-
   addMessage(bool sendClicked) {
     if (messageTextEdittingController.text != "") {
       String message = messageTextEdittingController.text;
@@ -70,12 +62,12 @@ class ChatScreenViewModel extends GetxController {
     }
   }
 
-  void initialize(String chatWithUsername, myUserName, chatroomId) async {
+  void initialize(String chatWithUsername, myUserName, chatroomId) {
     _chatRoomId = chatroomId;
     print("chatroom id ${_chatRoomId!}");
-    _name = await _preferncesService.getDisplayName();
-    _profileUrl = await _preferncesService.getUserProfileUrl();
-    _userName = await _preferncesService.getUserName();
-    _email = await _preferncesService.getUserEmail();
+    _name = _preferncesService.getDisplayName();
+    _profileUrl = _preferncesService.getUserProfileUrl();
+    _userName = _preferncesService.getUserName();
+    _email = _preferncesService.getUserEmail();
   }
 }

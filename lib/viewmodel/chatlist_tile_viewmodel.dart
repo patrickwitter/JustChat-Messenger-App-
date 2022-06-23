@@ -31,7 +31,6 @@ class ChatListTileViewModel extends GetxController {
     // _name.value = "${querySnapshot.docs[0]["username"]} ";
     _name.value = myUsername;
     _profilePicUrl.value = "${querySnapshot.docs[0]["imgUrl"]}";
-    print("_profilePicUrl.value   ${_profilePicUrl.value}");
   }
 
   void loadChatScreen(String chatRoomid) {

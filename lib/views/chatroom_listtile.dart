@@ -16,12 +16,9 @@ class ChatRoomListTile extends StatelessWidget {
     return BaseViewInit<ChatListTileViewModel>(
       onModelReady: (model) => model.initialize(chatRoomId, myUsername),
       builder: ((context, model) {
-        return GestureDetector(
+        return InkWell(
+          splashColor: Colors.blue,
           onTap: () {
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => ChatScreen( name:model.name, chatWithUsername: model.username)));
             model.loadChatScreen(chatRoomId);
           },
           child: Container(
@@ -31,9 +28,9 @@ class ChatRoomListTile extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Image.network(
-                    model.profilePicUrl == ""
-                        ? "https://static.toiimg.com/thumb/msid-86086241,imgsize-38908,width-400,resizemode-4/86086241.jpg"
-                        : model.profilePicUrl,
+                    // model.profilePicUrl == ""
+                    "https://static.toiimg.com/thumb/msid-86086241,imgsize-38908,width-400,resizemode-4/86086241.jpg",
+                    //: model.profilePicUrl,
                     height: 40,
                     width: 40,
                   ),

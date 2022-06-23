@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:messengerapp/viewmodel/home_viewmodel.dart';
 import 'package:messengerapp/views/baseviewinit.dart';
 import 'package:messengerapp/views/chatroom_list.dart';
-import 'package:messengerapp/views/searchuserlist.dart';
+import 'package:messengerapp/views/searchuser.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -87,7 +87,7 @@ class Home extends StatelessWidget {
 
                   Obx(() => Visibility(
                         visible: model.isSearching,
-                        child: SearchUserList(
+                        child: SearchUser(
                           user: model.searchUsernameEditingController.text,
                         ),
                         replacement: ChatRoomList(

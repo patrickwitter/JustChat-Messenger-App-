@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:messengerapp/constants/navigation_constants.dart';
 import 'package:messengerapp/models/user.dart';
-import 'package:messengerapp/services/navigation_service.dart';
 import 'package:messengerapp/services/shareprefernces_service.dart';
 
 class FirebaseService {
@@ -72,7 +70,7 @@ class FirebaseService {
 
 // 6.a Searches in the user collection where it returns a stream
 // of query snapshot where the username is equal to the user name we passed in
-  Future<Stream<QuerySnapshot>> getUserByUserName(String username) async {
+  Stream<QuerySnapshot> getUserByUserName(String username) {
     return FirebaseFirestore.instance
         .collection("users")
         .where("username", isEqualTo: username)

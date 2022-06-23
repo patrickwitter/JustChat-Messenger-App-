@@ -7,7 +7,6 @@ import 'package:messengerapp/services/navigation_service.dart';
 import 'package:messengerapp/services/shareprefernces_service.dart';
 import 'package:messengerapp/setup.dart';
 import 'package:messengerapp/theme.dart';
-import 'package:messengerapp/views/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

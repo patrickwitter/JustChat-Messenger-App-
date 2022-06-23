@@ -30,18 +30,18 @@ class HomeViewModel extends GetxController {
 
   get isSearching => _isSearching.value;
 
-  Future<void> _getMyInfoFromSharedPreference() async {
-    _name.value = await _preferncesService.getDisplayName();
-    _profileUrl.value = await _preferncesService.getUserProfileUrl();
-    _userName = await _preferncesService.getUserName();
+  void _getMyInfoFromSharedPreference() {
+    _name.value = _preferncesService.getDisplayName();
+    _profileUrl.value = _preferncesService.getUserProfileUrl();
+    _userName = _preferncesService.getUserName();
     print("userName ${_userName}");
-    _email.value = await _preferncesService.getUserEmail();
+    _email.value = _preferncesService.getUserEmail();
   }
 
-  void initialze() async {
+  void initialze() {
     searchUsernameEditingController.text = _controllertext.value;
 
-    await _getMyInfoFromSharedPreference();
+    _getMyInfoFromSharedPreference();
   }
 
   void signOut() async {
@@ -51,8 +51,10 @@ class HomeViewModel extends GetxController {
 
   void onSearchClick() {
     print("Clicked Search");
-    _firebaseService.getUserByUserName(searchUsernameEditingController.text);
+    print(" text searched ${searchUsernameEditingController.text}");
+    _isSearching.value = false;
     _isSearching.value = true;
+    // _firebaseService.getUserByUserName(searchUsernameEditingController.text);
   }
 
   void cancelSearch() {

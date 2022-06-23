@@ -13,7 +13,6 @@ Route<dynamic> ongenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const SignIn());
     case Routes.chatscreen:
       Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
-      print(args);
       return MaterialPageRoute(
         builder: ((context) => ChatScreen(
               otherUsername: args["otherUserName"],
