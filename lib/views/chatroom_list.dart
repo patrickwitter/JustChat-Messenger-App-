@@ -15,8 +15,9 @@ class ChatRoomList extends StatelessWidget {
     return BaseViewInit<ChatRoomListViewModel>(
         onModelReady: (model) => model.initialize(),
         builder: ((context, model) {
+          print("is chatroom stream null ${model.chatRoomListStream == null}");
           return StreamBuilder<QuerySnapshot>(
-            stream: model.chatRoomsStream,
+            stream: model.chatRoomListStream,
             builder: (context, snapshot) {
               // print(
               //     "SnapShot infor ${snapshot.hasData}\n  Error: ${snapshot.hasError}");

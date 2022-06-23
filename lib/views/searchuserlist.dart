@@ -18,7 +18,8 @@ class SearchUserList extends StatelessWidget {
             stream: model.usersStream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                print("has data");
+                print(
+                    "Snapshot data search user list ${snapshot.data} Connection state ${snapshot.connectionState}");
                 return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   shrinkWrap: true,
@@ -33,10 +34,14 @@ class SearchUserList extends StatelessWidget {
                   },
                 );
               } else if (!snapshot.hasData) {
+                print(
+                    "Snapshot data search user list ${snapshot.data} Connection state ${snapshot.connectionState}");
                 return Center(
                   child: Text("No user found"),
                 );
               } else {
+                print(
+                    "Snapshot data search user list ${snapshot.data} Connection state ${snapshot.connectionState}");
                 return Center(
                   child: CircularProgressIndicator(),
                 );

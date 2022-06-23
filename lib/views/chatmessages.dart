@@ -17,6 +17,7 @@ class ChatMessages extends StatelessWidget {
     return BaseViewInit<ChatMessagesViewModel>(
         onModelReady: (model) => model.initalize(chatRoomid),
         builder: (context, model) {
+          print("Is stream null ${model.messengeStream == null}");
           return StreamBuilder<QuerySnapshot>(
             stream: model.messengeStream,
             builder: (context, snapshot) {
@@ -27,14 +28,16 @@ class ChatMessages extends StatelessWidget {
                     reverse: true,
                     itemBuilder: (context, index) {
                       DocumentSnapshot ds = snapshot.data!.docs[index];
-                      print(
-                          "message sent by ${ds["sendBy"]} the user $myUserName");
+                      // print(
+                      //     "message sent by ${ds["sendBy"]} the user $myUserName");
                       return ChatMessageTile(
                         message: ds["message"],
                         sendbyMe: myUserName == ds["sendBy"],
                       );
                     });
-              } else if (snapshot.connectionState != ConnectionState.waiting) {
+              } else if (snapshot.connectionState != ConnectionState.none) {
+                print(
+                    "Snapshot Data ${snapshot.hasData} connectionState ${snapshot.connectionState}");
                 return ListView(
                   children: [
                     Center(

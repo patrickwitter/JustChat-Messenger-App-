@@ -8,6 +8,7 @@ class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<SignInViewModel>(builder: ((context, model) {
+      print("in sign int");
       return Scaffold(
         appBar: AppBar(
           title: Text("Messenger Clone"),
