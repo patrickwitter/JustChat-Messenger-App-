@@ -12,18 +12,17 @@ import 'package:messengerapp/viewmodel/searchuser_viewmodel.dart';
 import 'package:messengerapp/viewmodel/signin_viewmodel.dart';
 
 void setup() {
-  SharedPreferncesService.init();
-
-  Get.lazyPut<NavigationService>(() => NavigationService(), fenix: true);
-  Get.lazyPut<FirebaseService>(() => FirebaseService(), fenix: true);
-  Get.lazyPut<ChatRoomListViewModel>(() => ChatRoomListViewModel());
+  Get.put(SharedPreferncesService(), permanent: true);
+  Get.put<NavigationService>(NavigationService(), permanent: true);
+  Get.put<FirebaseService>(FirebaseService(), permanent: true);
+  Get.put<ChatRoomListViewModel>(ChatRoomListViewModel());
   Get.lazyPut<SearchUserViewModel>(() => SearchUserViewModel());
   Get.lazyPut<ChatListTileViewModel>(() => ChatListTileViewModel());
-  Get.lazyPut<ChatMessagesViewModel>(() => ChatMessagesViewModel());
+  Get.put<ChatMessagesViewModel>(ChatMessagesViewModel());
   Get.lazyPut<SearchListUserTileViewModel>(() => SearchListUserTileViewModel());
   Get.lazyPut<ChatScreenViewModel>(() => ChatScreenViewModel());
   Get.lazyPut<SearchUserViewModel>(() => SearchUserViewModel());
-  Get.put(SharedPreferncesService(), permanent: true);
+
   Get.put(HomeViewModel());
   Get.put(SignInViewModel());
 }

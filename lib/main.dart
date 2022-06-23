@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:messengerapp/constants/navigation_constants.dart' as navconst;
 import 'package:messengerapp/route.dart' as router;
 import 'package:messengerapp/services/navigation_service.dart';
+import 'package:messengerapp/services/shareprefernces_service.dart';
 import 'package:messengerapp/setup.dart';
 import 'package:messengerapp/theme.dart';
 import 'package:messengerapp/views/home.dart';
@@ -12,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   setup();
+  SharedPreferncesService.init();
   runApp(const MessengerApp());
 }
 
@@ -22,12 +24,12 @@ class MessengerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Messenger App',
-        theme: appTheme,
-        home: const Home(),
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: router.ongenerateRoute,
-        initialRoute: navconst.Routes.signin,
-        navigatorKey: Get.find<NavigationService>().navkey);
+      title: 'Messenger App',
+      theme: appTheme,
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: router.ongenerateRoute,
+      initialRoute: navconst.Routes.signin,
+      navigatorKey: Get.find<NavigationService>().navkey,
+    );
   }
 }

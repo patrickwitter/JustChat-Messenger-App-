@@ -10,7 +10,6 @@ class ChatMessageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(" Sent by me $sendbyMe");
     return Row(
       mainAxisAlignment:
           sendbyMe ? MainAxisAlignment.end : MainAxisAlignment.start,
