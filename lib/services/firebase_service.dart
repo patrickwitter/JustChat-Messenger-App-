@@ -9,7 +9,6 @@ import 'package:messengerapp/services/shareprefernces_service.dart';
 
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final NavigationService _navigationService = Get.find<NavigationService>();
   final SharedPreferncesService _preferncesService =
       Get.find<SharedPreferncesService>();
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -51,9 +50,7 @@ class FirebaseService {
           username: userDetails.email!.replaceAll("@gmail.com", ""),
         ).toJson();
 
-        addUserInfoToDB(userDetails.uid, userInfoMap).then((value) {
-          _navigationService.replaceAndNavigateTo(Routes.home);
-        });
+        await addUserInfoToDB(userDetails.uid, userInfoMap);
       }
     }
     return;
@@ -126,7 +123,7 @@ class FirebaseService {
 // Goes to the collection chatrooms then goes to the appropriate chatroom id
 // Goes into the chats collection orders the messages by desceding order by
 // timestamp and then  returns the querysnap shots
-  Future<Stream<QuerySnapshot>> getChatRoomMessages(chatRoomId) async {
+  Stream<QuerySnapshot> getChatRoomMessages(chatRoomId) {
     return FirebaseFirestore.instance
         .collection("chatrooms")
         .doc(chatRoomId)
@@ -135,10 +132,9 @@ class FirebaseService {
         .snapshots();
   }
 
-  // 4.a
-  Future<Stream<QuerySnapshot>> getChatRooms() async {
+  // 4.as
+  Stream<QuerySnapshot> getChatRooms(myUsername) {
     // Gets username from shared preferences.
-    String myUsername = await _preferncesService.getUserName();
 
     //Gets stream info from firebase. Gets the collection "chatrooms "
     // and orders each of it's children (the different chatrooms) by the last

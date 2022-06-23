@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:messengerapp/constants/shared_preferenceskey.dart';
 
 class SharedPreferncesService {
-  static late SharedPreferences _preferences;
+  static SharedPreferences? _preferences;
 
   static void init() async {
     _preferences = await SharedPreferences.getInstance();
@@ -10,48 +10,50 @@ class SharedPreferncesService {
 
   //save data
   Future<bool> saveUserName(String getUserName) async {
-    return _preferences.setString(SharedPrefKey.userNameKey, getUserName);
+    return _preferences!.setString(SharedPrefKey.userNameKey, getUserName);
   }
 
   Future<bool> saveUserEmail(String getUseremail) async {
-    return _preferences.setString(SharedPrefKey.userEmailKey, getUseremail);
+    return _preferences!.setString(SharedPrefKey.userEmailKey, getUseremail);
   }
 
   Future<bool> saveUserId(String getUserId) async {
-    return _preferences.setString(SharedPrefKey.userIdKey, getUserId);
+    return _preferences!.setString(SharedPrefKey.userIdKey, getUserId);
   }
 
   Future<bool> saveDisplayName(String getDisplayName) async {
-    return _preferences.setString(SharedPrefKey.displayNameKey, getDisplayName);
+    return _preferences!
+        .setString(SharedPrefKey.displayNameKey, getDisplayName);
   }
 
   Future<bool> saveUserProfileUrl(String getUserProfile) async {
-    return _preferences.setString(
-        SharedPrefKey.userProfilePicKey, getUserProfile);
+    return _preferences!
+        .setString(SharedPrefKey.userProfilePicKey, getUserProfile);
   }
 
   // get data
-  Future<String> getUserName() async {
-    return _preferences.getString(SharedPrefKey.userNameKey) ?? "";
+  String getUserName() {
+    String username = _preferences!.getString(SharedPrefKey.userNameKey) ?? "";
+    return username;
   }
 
-  Future<String> getUserEmail() async {
-    return _preferences.getString(SharedPrefKey.userEmailKey) ?? "";
+  String getUserEmail() {
+    return _preferences!.getString(SharedPrefKey.userEmailKey) ?? "";
   }
 
-  Future<String> getUserId() async {
-    return _preferences.getString(SharedPrefKey.userIdKey) ?? "";
+  String getUserId() {
+    return _preferences!.getString(SharedPrefKey.userIdKey) ?? "";
   }
 
-  Future<String> getDisplayName() async {
-    return _preferences.getString(SharedPrefKey.displayNameKey) ?? "";
+  String getDisplayName() {
+    return _preferences!.getString(SharedPrefKey.displayNameKey) ?? "";
   }
 
-  Future<String> getUserProfileUrl() async {
-    return _preferences.getString(SharedPrefKey.userProfilePicKey) ?? "";
+  String getUserProfileUrl() {
+    return _preferences!.getString(SharedPrefKey.userProfilePicKey) ?? "";
   }
 
   Future<bool> deleteUserInfo() async {
-    return await _preferences.clear();
+    return await _preferences!.clear();
   }
 }

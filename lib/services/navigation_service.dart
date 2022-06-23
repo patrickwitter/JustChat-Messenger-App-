@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 class NavigationService {
-  final GlobalKey<NavigatorState> _navigatorkey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> _navigatorkey =
+      GlobalKey<NavigatorState>();
   get navkey => _navigatorkey;
 
   Future<dynamic> navigateTo(String routeName, {dynamic arguements}) {
@@ -17,6 +18,10 @@ class NavigationService {
 
   Future<dynamic> replaceAndNavigateTo(String routeName, {dynamic arguements}) {
     return _navigatorkey.currentState!
-        .pushReplacementNamed(routeName, arguments: arguements);
+        .pushNamedAndRemoveUntil(routeName, (Route<dynamic> route) => false);
+  }
+
+  Future<dynamic> pushReplacememtNamed(String routeName, {dynamic arguements}) {
+    return _navigatorkey.currentState!.pushReplacementNamed(routeName);
   }
 }
