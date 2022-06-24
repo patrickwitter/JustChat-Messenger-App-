@@ -16,7 +16,7 @@ class Home extends StatelessWidget {
           print("on home");
           return Scaffold(
             appBar: AppBar(
-              title: Text("Messenger Clone ${model.myUserName}"),
+              title: Text("Just Chat Messenger App"),
               actions: [
                 InkWell(
                   onTap: () {
@@ -67,7 +67,7 @@ class Home extends StatelessWidget {
                                     model.searchUsernameEditingController,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "username"),
+                                    hintText: "Search User"),
                               )),
                               IconButton(
                                   onPressed: () {

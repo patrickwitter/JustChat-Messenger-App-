@@ -52,14 +52,17 @@ class HomeViewModel extends GetxController {
   void onSearchClick() {
     print("Clicked Search");
     print(" text searched ${searchUsernameEditingController.text}");
-    _isSearching.value = false;
-    _isSearching.value = true;
-    // _firebaseService.getUserByUserName(searchUsernameEditingController.text);
+    _toggleSearch();
   }
 
   void cancelSearch() {
     _isSearching.value = false;
     searchUsernameEditingController.text = "";
+  }
+
+  void _toggleSearch() {
+    _isSearching.value = false;
+    _isSearching.value = true;
   }
 
   @override

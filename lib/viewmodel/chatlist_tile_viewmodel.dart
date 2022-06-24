@@ -26,9 +26,6 @@ class ChatListTileViewModel extends GetxController {
     _username.value = chatRoomId.replaceAll(myUsername, "").replaceAll("_", "");
     QuerySnapshot querySnapshot =
         await _firebaseService.getUserInfo(_username.value);
-    print(
-        "something bla bla ${querySnapshot.docs[0].id} ${querySnapshot.docs[0]["name"]}  ${querySnapshot.docs[0]["imgUrl"]}");
-    // _name.value = "${querySnapshot.docs[0]["username"]} ";
     _name.value = myUsername;
     _profilePicUrl.value = "${querySnapshot.docs[0]["imgUrl"]}";
   }

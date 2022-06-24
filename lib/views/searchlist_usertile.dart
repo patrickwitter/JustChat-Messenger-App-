@@ -19,7 +19,8 @@ class SearchListUserTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<SearchListUserTileViewModel>(
       builder: (context, model) {
-        return GestureDetector(
+        return InkWell(
+          splashColor: Colors.blue,
           onTap: () {
             model.createChatRoom(username);
           },

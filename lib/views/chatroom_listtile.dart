@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messengerapp/viewmodel/chatlist_tile_viewmodel.dart';
 import 'package:messengerapp/views/baseviewinit.dart';
+import 'package:optimized_cached_image/optimized_cached_image.dart';
 
 class ChatRoomListTile extends StatelessWidget {
   const ChatRoomListTile(
@@ -16,6 +17,7 @@ class ChatRoomListTile extends StatelessWidget {
     return BaseViewInit<ChatListTileViewModel>(
       onModelReady: (model) => model.initialize(chatRoomId, myUsername),
       builder: ((context, model) {
+        print(" Profile pic ${model.profilePicUrl}");
         return InkWell(
           splashColor: Colors.blue,
           onTap: () {
@@ -27,12 +29,14 @@ class ChatRoomListTile extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(30),
-                  child: Image.network(
-                    // model.profilePicUrl == ""
-                    "https://static.toiimg.com/thumb/msid-86086241,imgsize-38908,width-400,resizemode-4/86086241.jpg",
-                    //: model.profilePicUrl,
-                    height: 40,
-                    width: 40,
+                  child: OptimizedCacheImage(
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                    imageUrl:
+                        "https://static.toiimg.com/thumb/msid-86086241,imgsize-38908,width-400,resizemode-4/86086241.jpg",
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                 ),
                 SizedBox(width: 12),
