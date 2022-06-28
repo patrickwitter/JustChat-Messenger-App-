@@ -16,7 +16,7 @@ class FirebaseService {
   }
 
 // 1.2
-  signInWithGoogle() async {
+  Future<bool> signInWithGoogle() async {
     final GoogleSignInAccount? googleSignInAccount =
         await _googleSignIn.signIn();
 
@@ -49,9 +49,11 @@ class FirebaseService {
         ).toJson();
 
         await addUserInfoToDB(userDetails.uid, userInfoMap);
+        return true;
       }
     }
-    return;
+
+    return false;
   }
 
   Future signOut() async {

@@ -7,6 +7,7 @@ import 'package:messengerapp/services/navigation_service.dart';
 import 'package:messengerapp/services/shareprefernces_service.dart';
 import 'package:messengerapp/setup.dart';
 import 'package:messengerapp/theme.dart';
+import 'package:sizer/sizer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,13 +23,17 @@ class MessengerApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Messenger App',
-      theme: appTheme,
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: router.ongenerateRoute,
-      initialRoute: navconst.Routes.signin,
-      navigatorKey: Get.find<NavigationService>().navkey,
+    return Sizer(
+      builder: ((context, orientation, deviceType) {
+        return MaterialApp(
+          title: 'Messenger App',
+          theme: appTheme,
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: router.ongenerateRoute,
+          initialRoute: navconst.Routes.signin,
+          navigatorKey: Get.find<NavigationService>().navkey,
+        );
+      }),
     );
   }
 }

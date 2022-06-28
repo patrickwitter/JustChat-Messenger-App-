@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:messengerapp/viewmodel/home_viewmodel.dart';
 import 'package:messengerapp/views/baseviewinit.dart';
 import 'package:messengerapp/views/chatroom_list.dart';
 import 'package:messengerapp/views/searchuser.dart';
+import 'package:sizer/sizer.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,6 +17,7 @@ class Home extends StatelessWidget {
         builder: (context, model) {
           print("on home");
           return Scaffold(
+            backgroundColor: Color(0xfff5f5f5),
             appBar: AppBar(
               title: Text("Just Chat Messenger App"),
               actions: [
@@ -28,8 +31,8 @@ class Home extends StatelessWidget {
                 )
               ],
             ),
-            body: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 3.w),
               child: Column(
                 children: [
                   Row(
@@ -84,7 +87,25 @@ class Home extends StatelessWidget {
                       ),
                     ],
                   ),
-
+                  Obx(
+                    () => Visibility(
+                      visible: !model.isSearching,
+                      replacement: Container(),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 2.h),
+                          child: Text(
+                            "Chats",
+                            style: GoogleFonts.roboto(
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   Obx(() => Visibility(
                         visible: model.isSearching,
                         child: SearchUser(

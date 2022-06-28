@@ -19,6 +19,7 @@ class ChatScreen extends StatelessWidget {
           model.initialize(otherUsername, name, chatRoomId),
       builder: ((context, model) {
         return Scaffold(
+          backgroundColor: Color(0xfffdfdfd),
           appBar: AppBar(
             title: Text(otherUsername),
           ),
@@ -29,7 +30,7 @@ class ChatScreen extends StatelessWidget {
                 Container(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    color: Colors.black.withOpacity(0.8),
+                    color: Color(0xffdcdcdc),
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Row(
                       children: [
@@ -40,12 +41,13 @@ class ChatScreen extends StatelessWidget {
                           onChanged: (value) {
                             //addMessage(false); // this used to clear the textfield if it is sent
                           },
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "type a message",
                               hintStyle: TextStyle(
-                                  color: Colors.white.withOpacity(0.6))),
+                                color: Colors.grey[800],
+                              )),
                         )),
                         GestureDetector(
                           onTap: () {
@@ -53,7 +55,7 @@ class ChatScreen extends StatelessWidget {
                           },
                           child: Icon(
                             Icons.send,
-                            color: Colors.white,
+                            color: Colors.blue,
                           ),
                         )
                       ],
