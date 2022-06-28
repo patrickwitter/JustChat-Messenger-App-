@@ -1,16 +1,7 @@
-# messengerapp
+# Messengerapp
 
-A new Flutter project.
+<b> Built with Firebase and Getx </b>
+<br/><br/>
+<!--- ![ChatApp](https://user-images.githubusercontent.com/53438425/176084552-d3950c80-a8a2-4e1b-98ec-e9bd4ce2753a.gif) --->
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://user-images.githubusercontent.com/53438425/176084552-d3950c80-a8a2-4e1b-98ec-e9bd4ce2753a.gif" width="400" height="700"/>
